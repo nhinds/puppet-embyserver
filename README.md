@@ -15,65 +15,55 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This module installs [Emby server](http://emby.media/) on a node running Ubuntu or Debian Linux.
+
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+The module installs Emby by adding the official apt repo to the system, installing the package, and ensuring the service is running. No configuration is done at the moment.
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+Emby itself also supports Arch, CentOS, Fedora, Docker, Mac OSX, Windows and FreeBSD - but alas, I am lazy.
 
 ## Setup
 
 ### What embyserver affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* Packages: Emby repository, emby-server
+* Services: emby-server
 
 ### Setup Requirements **OPTIONAL**
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with embyserver
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+Requires the Puppetlabs APT module.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+Currently there's not a lot to do:
+
+include 'embyserver'
+
+or
+
+class{'embyserver': }
+
+You can, if you like, specify the package name, service name and repo (the OS-specific URL part from http://emby.media/downloads/linux-server/) - however these are OS-dependent, so probably don't mess with them...
+
+class{'embyserver':
+	package => 'emby-server',
+	service => 'emby-server',
+	repo => 'xUbuntu_14.04',
+}
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+* class embyserver - installs Emby package repository, emby-server package, keeps emby-server service running.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+* Requires Ubuntu or Debian linux (only tested on Ubuntu)
+* OS version compatibility is done by simple checking of version and matching to a supported version on the Emby website; this may (let's face it, will) get out of date
+* Does not configure Emby server
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Pull requests welcome. If you want this to work on another linux distro and don't feel like coding, give me a yell and I can probably sort that out; other platforms you're probably better off writing it yourself...
 
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
