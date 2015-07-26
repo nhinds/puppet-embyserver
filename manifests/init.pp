@@ -29,11 +29,11 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Andy Newton <amn@ecs.soton.ac.uk>
 #
 # === Copyright
 #
-# Copyright 2015 Your name here, unless otherwise noted.
+# Copyright 2015 Andy Newton
 #
 class embyserver (
   $repo = $embyserver::params::repo,
@@ -64,6 +64,7 @@ class embyserver (
 
   service {$service:
     ensure => running,
+    require => Package[$package],
   }
 
 }
